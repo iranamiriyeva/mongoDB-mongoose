@@ -1,8 +1,24 @@
-require('dotenv').config();
+require('dotenv').config()
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
-let Person;
+//Solution2: Create a Model
+//Define a Schema
+let personSchema = new mongoose.Schema({
+  name: {type: String, required: true},
+  age: Number,
+  favoriteFoods: [String]
+})
+//Export a Model
+const Person = mongoose.model('Person', personSchema)
+
+//Create an instance of the model 
+let newPerson = new Person({
+  name: 'Irana',
+  age: 39,
+  favoriteFoods: ['LevengiChicken', 'Fish', 'Meat']
+})
+
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
