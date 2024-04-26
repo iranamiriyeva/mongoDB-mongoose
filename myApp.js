@@ -12,17 +12,21 @@ let personSchema = new mongoose.Schema({
 //Export a Model
 const Person = mongoose.model('Person', personSchema)
 
-//Create an instance of the model 
-let newPerson = new Person({
+//Solution3: Create and Save a Record of a Model
+const createAndSavePerson = (done) => {
+  //Create an instance of the model 
+  let newPerson = new Person({
   name: 'Irana',
   age: 39,
   favoriteFoods: ['LevengiChicken', 'Fish', 'Meat']
 })
+  //Save data to the database
+  newPerson.save(function(err, data) {
+    if (err) return console.error(err)
+    done(null, data)
+  })
+}
 
-
-const createAndSavePerson = (done) => {
-  done(null /*, data*/);
-};
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
